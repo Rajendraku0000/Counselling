@@ -1,14 +1,5 @@
 from flask import Flask, render_template, request
-# import mysql.connector
 
-# abcd = mysql.connector.connect(host="localhost", user="root", password="kempk2933g", database="counselling")
-# new_corsor=abcd.cursor()
-# db_config = {
-#     'host': 'localhost',
-#     'user': 'root',
-#     'password': 'kempk2933g',
-#     'database': 'counselling',
-# }
 
 
 app = Flask(__name__)
@@ -45,10 +36,7 @@ def chatbot():
         elif state.step == 3:
             state.education = request.form["education"]
             state.step = 4
-            # with mysql.connector.connect(**db_config) as conn:
-            #     cursor = conn.cursor()
-            #     cursor.execute("INSERT INTO user_data(user_name, user_email, contect_number, education) VALUES (%s, %s, %s, %s)", (state.user_name, state.user_email, state.cont, state.education))
-            #     conn.commit()
+          
         elif state.step == 4:
             state.agree = request.form["agree"]
             if state.education == "Tech" or state.agree.lower() == "yes":
@@ -76,6 +64,5 @@ def chatbot():
     return render_template("index.html", state=state)
 
 
-if __name__ == "__main__":
-    app.run(debug=True)
+
  
