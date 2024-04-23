@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+ 
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 30%;
+            position: relative;
+            left: 11%;
+           
+        }
+        
+        .container {
+            width: 400px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            right: 9%; 
+        }
+        
+        label {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        input, select {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: calc(100% - 22px);
+        }
+        
+        button {
+            padding: 10px;
+            background-color: #0c7b93;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin:10px 0px;
+        }
+        
+        button:hover {
+            background-color: #095f71;
+        }
+    </style>
+</head>
+<body>
+    <form method="POST">
+        {% if state.step == 0 %}
+        <label for="user_name">What is your name?</label>
+        <input type="text" id="user_name" name="user_name" required>
+        <button type="submit">Next</button>
+        
+        {% elif state.step == 1 %}
+        <label for="user_email">Please provide your email address:</label>
+        <input type="email" id="user_email" name="user_email" required>
+        <button type="submit">Next</button>
+        {% elif state.step == 2 %}
+        <label for="cont">What is your contact number?</label>
+        <input type="text" id="cont" name="cont" required>
+        <button type="submit">Next</button>
+        {% elif state.step == 3 %}
+        <label for="education">Your Education Background:</label>
+        <select id="education" name="education" required>
+            <option value="Tech">Tech</option>
+            <option value="Non-tech">Non-tech</option>
+            <option value="12th Pass">12th Pass</option>
+        </select>
+        <button type="submit">Next</button>
+        {% elif state.step == 4 %}
+        <label for="agree">Do you agree with the content of the video? Yes or No</label>
+        <input type="text" id="agree" name="agree" required>
+        <button type="submit">Next</button>
+
+
+
+
+
+
+
+
+
+
+
+
+        {% elif state.step == 5 %}
+        {% if state.education == "Tech" and state.agree.lower() == "yes" %}
+        <label for="course">We are offering you 2 courses: Internship and Specialization Course Please Select One</label>
+        <select id="course" name="course" required>
+            <option value="Internship">Internship</option>
+            <option value="Specialization Course">Specialization Course</option>
+        </select>
+        <button type="submit">Next</button>
+
+
+        {%elif state.education == "Non-tech" and state.agree.lower() == "yes"%}
+        <label for="course">Please select your Interest</label>
+        <select id="course" name="course" required>
+            <option value="maths">Maths</option>
+            <option value="designing">Designing</option>
+        </select>
+        <button type="submit">Next</button>
+
+        {%elif state.education == "12th Pass" and state.agree.lower() == "yes"%}
+        <h1>  We can't provide you job Assistant but we can provide you only skills
+            
+        </h1>
+        <label for="course">Please select your Interest</label>
+        <select id="course" name="course" required>
+            <option value="maths">Maths</option>
+            <option value="designing">Designing</option>
+        </select>
+        <button type="submit">Next</button>
+        
+        {% endif %}
+
+
+
+
+
+
+
+
+        {% elif state.step == 6 %}
+        {% if state.course.lower() == "internship" %}
+        <label for="internship_option">Select Internship Option:</label>
+        <select id="internship_option" name="internship_option" required>
+            <option value="Data Science">Data Science</option>
+            <option value="Web Development">Web Development</option>
+            <option value="App Development">App Development</option>
+        </select>
+        <button type="submit">Next</button>
+        {% elif state.course.lower() == "specialization course" %}
+        <label for="internship_option">Select Specialization Course:</label>
+        <select id="internship_option" name="internship_option" required>
+            <option value="Data Science 10 month">Data Science</option>
+            <option value="Web Development 10 month">Web Development</option>
+            <option value="App Development 10 month">App Development</option>
+        </select>
+        <button type="submit">Next</button>
+
+        {% elif state.course.lower() == "maths" %}
+        <label for="internship_option">We Provide 2 Specialization Course:</label>
+        <select id="internship_option" name="internship_option" required>
+            <option value="Data Science non_tech">Data Science</option>
+            <option value="competitive coding non_tech">competitive Coding</option>
+        </select>
+        <button type="submit">Next</button>
+
+        {% elif state.course.lower() == "designing" %}
+        <label for="internship_option">We Provide 2 Specialization Course:</label>
+        <select id="internship_option" name="internship_option" required>
+            <option value="Web Development non_tech">Web Development</option>
+            <option value="App Development non_tech">App Development</option>
+        </select>
+        <button type="submit">Next</button>
+
+        {% endif %}
+
+
+
+
+
+
+        {% elif state.step == 7 %}
+        {% if state.internship_option.lower() == "data science" %}
+        <p> Data Science 3-Month Internship Program: 
+            <br>
+            Topics Covered:
+            <br>
+            Introduction to Python for Data Science, Data Wrangling and Cleaning, Exploratory Data Analysis (EDA), Data Visualization using Matplotlib and Seaborn, Introduction to Machine Learning Algorithms (Regression, Classification, Clustering), Model Evaluation and Validation, Introduction to Natural Language Processing (NLP), Introduction to Deep Learning with TensorFlow or PyTorch, Introduction to Big Data Technologies (Hadoop, Spark) 
+            <br>
+            Job Roles: 
+            <br>
+            Data Analyst, Junior Data Scientist, Business Analyst, Data Engineer (Entry-level positions)
+            <br>
+            Salary Range: 3,00,000 to 4,00,000 per annum (depending on experience and location)
+            <br>
+            Roadmap:
+            <br>
+            Basic understanding of Python programming language, Learn fundamental concepts of Data Science and Machine Learning, Hands-on experience with real-world datasets, Building simple predictive models, Basic understanding of Deep Learning and Big Data concepts </p>
+            <br>
+            
+
+            {%elif state.internship_option == "competitive coding non_tech" %}
+            <p> Data Science 3-Month Course:
+                <br>
+                Topics Covered:
+                <br>
+                Introduction to Python for Data Science, Data Wrangling and Cleaning, Exploratory Data Analysis (EDA), Data Visualization using Matplotlib and Seaborn, Introduction to Machine Learning Algorithms (Regression, Classification, Clustering), Model Evaluation and Validation, Introduction to Natural Language Processing (NLP), Introduction to Deep Learning with TensorFlow or PyTorch, Introduction to Big Data Technologies (Hadoop, Spark) 
+                <br>
+                Job Roles:
+                <br>
+                Data Analyst, Junior Data Scientist, Business Analyst, Data Engineer (Entry-level positions)
+                <br>
+                Salary Range: 3,00,000 to 4,00,000 per annum (depending on experience and location)
+                <br>
+                Roadmap:
+                <br>
+                Basic understanding of Python programming language, Learn fundamental concepts of Data Science and Machine Learning, Hands-on experience with real-world datasets, Building simple predictive models, Basic understanding of Deep Learning and Big Data concepts
+                <br>
+                <br>
+                <br>
+            
+            Data Science 10-Month Course: 
+            <br>
+                  Topics Covered:
+                  <br>
+                  Advanced Python Programming for Data Science, Advanced Data Wrangling and Feature Engineering , Advanced Data Visualization and Dashboarding (Tableau, Power BI), Advanced Machine Learning Algorithms (Ensemble Methods, Time Series Analysis, Dimensionality Reduction), Advanced Model Evaluation Techniques (Cross-validation, Hyperparameter Tuning), Deep Dive into Natural Language Processing (Sentiment Analysis, Text Classification, Named Entity Recognition), Deep Learning Architectures (CNNs, RNNs, GANs), Big Data Processing and Analysis using Spark and Hadoop, Cloud Computing Platforms (AWS, Azure) for Data Science, Deployment of Machine Learning Models into Production, 
+                  <br>
+                  Job Roles: 
+                  <br>
+                  Data Scientist , Machine Learning Engineer, Big Data Engineer, Advanced Business Analyst, Data Analyst (with specialization in specific domains)
+                  <br>
+                  Salary Range: 8,00,000 to 12,00,000 per annum (depending on experience and location)
+                  <br>
+                  Roadmap:
+                  <br>
+                  In-depth understanding of Python programming language and its libraries (NumPy, Pandas, Scikit-learn), Mastery of advanced Data Science concepts and algorithms, Hands-on experience with large-scale datasets and real-world projects, Expertise in building and deploying complex machine learning models, Specialization in a particular domain or industry, Continuous learning and staying updated with the latest trends and technologies in Data Science and AI
+                  <br>
+            </p>
+
+
+
+            {%elif state.internship_option == "App Development non_tech" %}
+            <p> App Development 3-Month Intenship Program: 
+                <br>
+                Topics Covered:
+                <br>
+                         Introduction to mobile app development concepts, Basics of programming languages like Java (for Android) or Swift (for iOS), User interface (UI) design principles and tools, Fundamentals of mobile app architecture, Database basics and data storage options for mobile apps, Introduction to version control with Git, Basic app deployment and distribution 
+                         <br>
+                         Job Roles:
+                         <br>
+                         Junior Mobile App Developer, Mobile App Tester, UI/UX Designer (with basic app development skills), Technical Support Assistant
+                         <br>
+                         Salary Range: 4,00,000 to 6,00,000 per annum (depending on experience and location)
+                         <br>
+                         Roadmap:
+                         <br>
+                         Learn the basics of mobile app development and choose a platform (Android or iOS), Understand programming languages like Java for Android or Swift for iOS, Explore UI design principles and tools for creating user-friendly interfaces, Gain knowledge of basic app architecture and data storage options, Get familiar with version control using Git for collaboration, Deploy a simple app to an app store for distribution
+                         <br>
+            <br>
+        <p> App Development 10-Month Course:
+            <br>
+            Topics Covered:
+            <br>
+            Advanced programming concepts for mobile platforms (Java/Kotlin for Android, Swift for iOS), Advanced UI/UX design principles and tools, Advanced app architecture patterns like MVVM or MVP, Database management and integration (SQLite, Core Data, Firebase), User authentication and authorization mechanisms , App security best practices, Advanced app deployment and distribution strategies 
+            <br>
+            Job Roles:
+            <br>
+            Mobile App Developer, Senior Mobile App Developer, Mobile App Architect, Product Manager (with mobile app development expertise)
+            <br>
+            Salary Range: 7,00,000 to  10,00,000 per annum (depending on experience and location)
+            <br>
+           Roadmap: 
+           <br>
+           Dive deeper into advanced programming concepts and best practices for mobile platforms , Master advanced UI/UX design principles and tools for creating engaging interfaces, Learn about advanced app architecture patterns to build scalable and maintainable apps, Gain expertise in database management and integration for storing and retrieving app data, Implement user authentication and authorization mechanisms to secure user data, Understand app security best practices to protect against common vulnerabilities, Explore advanced app deployment and distribution strategies for reaching a wider audience<br> </p>
+ 
+            {%elif state.internship_option == "Data Science non_tech" %}
+            <p> Data Science 3-Month Internship Program: 
+                <br>
+                Topics Covered:
+                <br>
+                Introduction to Python for Data Science, Data Wrangling and Cleaning, Exploratory Data Analysis (EDA), Data Visualization using Matplotlib and Seaborn, Introduction to Machine Learning Algorithms (Regression, Classification, Clustering), Model Evaluation and Validation, Introduction to Natural Language Processing (NLP), Introduction to Deep Learning with TensorFlow or PyTorch, Introduction to Big Data Technologies (Hadoop, Spark) 
+                <br>
+                Job Roles: 
+                <br>
+                Data Analyst, Junior Data Scientist, Business Analyst, Data Engineer (Entry-level positions)
+                <br>
+                Salary Range: 3,00,000 to 4,00,000 per annum (depending on experience and location)
+                <br>
+                Roadmap:
+                <br>
+                Basic understanding of Python programming language, Learn fundamental concepts of Data Science and Machine Learning, Hands-on experience with real-world datasets, Building simple predictive models, Basic understanding of Deep Learning and Big Data concepts </p>
+                <br>
+                <br>
+                <br>
+            <p> Data Science 10-Month Course:
+                <br>
+                Topics Covered:
+                <br>
+                Advanced Python Programming for Data Science, Advanced Data Wrangling and Feature Engineering , Advanced Data Visualization and Dashboarding (Tableau, Power BI), Advanced Machine Learning Algorithms (Ensemble Methods, Time Series Analysis, Dimensionality Reduction), Advanced Model Evaluation Techniques (Cross-validation, Hyperparameter Tuning), Deep Dive into Natural Language Processing (Sentiment Analysis, Text Classification, Named Entity Recognition), Deep Learning Architectures (CNNs, RNNs, GANs), Big Data Processing and Analysis using Spark and Hadoop, Cloud Computing Platforms (AWS, Azure) for Data Science, Deployment of Machine Learning Models into Production, 
+                <br>
+                Job Roles:
+                <br>
+                Data Scientist , Machine Learning Engineer, Big Data Engineer, Advanced Business Analyst, Data Analyst (with specialization in specific domains), 
+                <br>
+                Salary Range: 8,00,000 to 12,00,000 per annum (depending on experience and location) 
+                <br>
+                Roadmap:
+                <br>
+                In-depth understanding of Python programming language and its libraries (NumPy, Pandas, Scikit-learn), Mastery of advanced Data Science concepts and algorithms, Hands-on experience with large-scale datasets and real-world projects, Expertise in building and deploying complex machine learning models, Specialization in a particular domain or industry, Continuous learning and staying updated with the latest trends and technologies in Data Science and AI) \n </p>
+    
+        {%elif state.internship_option == "Data Science 10 month" %}
+        <p> Data Science 10-Month Course:
+            <br>
+            Topics Covered:
+            <br>
+            Advanced Python Programming for Data Science, Advanced Data Wrangling and Feature Engineering , Advanced Data Visualization and Dashboarding (Tableau, Power BI), Advanced Machine Learning Algorithms (Ensemble Methods, Time Series Analysis, Dimensionality Reduction), Advanced Model Evaluation Techniques (Cross-validation, Hyperparameter Tuning), Deep Dive into Natural Language Processing (Sentiment Analysis, Text Classification, Named Entity Recognition), Deep Learning Architectures (CNNs, RNNs, GANs), Big Data Processing and Analysis using Spark and Hadoop, Cloud Computing Platforms (AWS, Azure) for Data Science, Deployment of Machine Learning Models into Production, 
+            <br>
+            Job Roles:
+            <br>
+            Data Scientist , Machine Learning Engineer, Big Data Engineer, Advanced Business Analyst, Data Analyst (with specialization in specific domains), 
+            <br>
+            Salary Range: 8,00,000 to 12,00,000 per annum (depending on experience and location) 
+            <br>
+            Roadmap:
+            <br>
+            In-depth understanding of Python programming language and its libraries (NumPy, Pandas, Scikit-learn), Mastery of advanced Data Science concepts and algorithms, Hands-on experience with large-scale datasets and real-world projects, Expertise in building and deploying complex machine learning models, Specialization in a particular domain or industry, Continuous learning and staying updated with the latest trends and technologies in Data Science and AI) \n </p>
+
+        {%elif state.internship_option == "Web Development non_tech" %}
+        <p> Web Development 3-Month Intenship Program:
+            <br>
+            Topics Covered:
+            <br>
+            HTML and CSS fundamentals, Introduction to JavaScript and DOM manipulation, Basic responsive design principles, Introduction to front-end frameworks like Bootstrap, Introduction to back-end development with Node.js and Express.js , Database fundamentals with MongoDB, Basic CRUD operations and RESTful APIs, Version control with Git and GitHub,
+            <br>
+            Job Roles:
+            <br>
+            Front-end Developer (Entry-level positions), Web Designer, Junior Web Developer, Technical Support Engineer (with basic web development skills) 
+            <br>
+            Salary Range: 4,50,000 to 6,50,000 per annum (depending on experience and location)
+            <br>
+           Roadmap: 
+           <br>
+           Learn HTML and CSS for building static web pages, Understand JavaScript basics for adding interactivity to web pages, Explore front-end frameworks for faster development, Get familiar with Node.js and Express.js for server-side development, Learn basic database operations with MongoDB, Build simple CRUD applications and RESTful APIs, Practice version control with Git and collaborate on GitHub projects
+        <br></p>
+        <br>
+        <p> 
+            Web Development 10-Month Course: 
+            <br>
+                         Topics Covered:
+                         <br>
+                         Advanced HTML5 and CSS3 techniques , JavaScript frameworks like React.js and Angular , Advanced responsive design and CSS preprocessors (Sass/Less), Server-side rendering and template engines, Authentication and authorization techniques , Introduction to relational databases and SQL, Advanced back-end development with Express.js and MVC architecture, Deployment strategies and DevOps tools
+                         <br>
+                         Job Roles:
+                         <br>
+                         Full-stack Developer, Senior Web Developer , Web Development Team Lead, DevOps Engineer (with web development expertise) 
+                         Salary Range: 7,00,000 to 10,00,000 per annum (depending on experience and location)
+                         <br>
+                         Roadmap:
+                         <br>
+                         
+                         Master advanced HTML5 and CSS3 features for modern web development , Deep dive into JavaScript frameworks like React.js or Angular for building dynamic web applications, Explore advanced concepts in responsive design and CSS preprocessors, Implement authentication and authorization mechanisms for secure web applications, Learn relational database management systems (RDBMS) and SQL for database-driven web applications, Architect complex web applications using Express.js and MVC design patterns, Deploy web applications using industry-standard DevOps tools and practices """)
+                
+        </p>
+
+        {%elif state.internship_option == "Web Development 10 month" %}
+        <p> 
+            Web Development 10-Month Course: 
+            <br>
+                         Topics Covered:
+                         <br>
+                         Advanced HTML5 and CSS3 techniques , JavaScript frameworks like React.js and Angular , Advanced responsive design and CSS preprocessors (Sass/Less), Server-side rendering and template engines, Authentication and authorization techniques , Introduction to relational databases and SQL, Advanced back-end development with Express.js and MVC architecture, Deployment strategies and DevOps tools
+                         <br>
+                         Job Roles:
+                         <br>
+                         Full-stack Developer, Senior Web Developer , Web Development Team Lead, DevOps Engineer (with web development expertise) 
+                         Salary Range: 7,00,000 to 10,00,000 per annum (depending on experience and location)
+                         <br>
+                         Roadmap:
+                         <br>
+                         
+                         Master advanced HTML5 and CSS3 features for modern web development , Deep dive into JavaScript frameworks like React.js or Angular for building dynamic web applications, Explore advanced concepts in responsive design and CSS preprocessors, Implement authentication and authorization mechanisms for secure web applications, Learn relational database management systems (RDBMS) and SQL for database-driven web applications, Architect complex web applications using Express.js and MVC design patterns, Deploy web applications using industry-standard DevOps tools and practices """)
+                
+        </p>
+
+        {%elif state.internship_option == "App Development 10 month" %}
+        <p> App Development 10-Month Course:
+            <br>
+            Topics Covered:
+            <br>
+            Advanced programming concepts for mobile platforms (Java/Kotlin for Android, Swift for iOS), Advanced UI/UX design principles and tools, Advanced app architecture patterns like MVVM or MVP, Database management and integration (SQLite, Core Data, Firebase), User authentication and authorization mechanisms , App security best practices, Advanced app deployment and distribution strategies 
+            <br>
+            Job Roles:
+            <br>
+            Mobile App Developer, Senior Mobile App Developer, Mobile App Architect, Product Manager (with mobile app development expertise)
+            <br>
+            Salary Range: 7,00,000 to  10,00,000 per annum (depending on experience and location)
+            <br>
+           Roadmap: 
+           <br>
+           Dive deeper into advanced programming concepts and best practices for mobile platforms , Master advanced UI/UX design principles and tools for creating engaging interfaces, Learn about advanced app architecture patterns to build scalable and maintainable apps, Gain expertise in database management and integration for storing and retrieving app data, Implement user authentication and authorization mechanisms to secure user data, Understand app security best practices to protect against common vulnerabilities, Explore advanced app deployment and distribution strategies for reaching a wider audience<br> </p>
+
+        {% elif state.internship_option.lower() == "web development" %}
+        <p> Web Development 3-Month Intenship Program:
+            <br>
+            Topics Covered:
+            <br>
+            HTML and CSS fundamentals, Introduction to JavaScript and DOM manipulation, Basic responsive design principles, Introduction to front-end frameworks like Bootstrap, Introduction to back-end development with Node.js and Express.js , Database fundamentals with MongoDB, Basic CRUD operations and RESTful APIs, Version control with Git and GitHub,
+            <br>
+            Job Roles:
+            <br>
+            Front-end Developer (Entry-level positions), Web Designer, Junior Web Developer, Technical Support Engineer (with basic web development skills) 
+            <br>
+            Salary Range: 4,50,000 to 6,50,000 per annum (depending on experience and location)
+            <br>
+           Roadmap: 
+           <br>
+           Learn HTML and CSS for building static web pages, Understand JavaScript basics for adding interactivity to web pages, Explore front-end frameworks for faster development, Get familiar with Node.js and Express.js for server-side development, Learn basic database operations with MongoDB, Build simple CRUD applications and RESTful APIs, Practice version control with Git and collaborate on GitHub projects
+        <br></p>
+        {% elif state.internship_option.lower() == "app development" %}
+            <p> App Development 3-Month Intenship Program: 
+                <br>
+                Topics Covered:
+                <br>
+                         Introduction to mobile app development concepts, Basics of programming languages like Java (for Android) or Swift (for iOS), User interface (UI) design principles and tools, Fundamentals of mobile app architecture, Database basics and data storage options for mobile apps, Introduction to version control with Git, Basic app deployment and distribution 
+                         <br>
+                         Job Roles:
+                         <br>
+                         Junior Mobile App Developer, Mobile App Tester, UI/UX Designer (with basic app development skills), Technical Support Assistant
+                         <br>
+                         Salary Range: 4,00,000 to 6,00,000 per annum (depending on experience and location)
+                         <br>
+                         Roadmap:
+                         <br>
+                         Learn the basics of mobile app development and choose a platform (Android or iOS), Understand programming languages like Java for Android or Swift for iOS, Explore UI design principles and tools for creating user-friendly interfaces, Gain knowledge of basic app architecture and data storage options, Get familiar with version control using Git for collaboration, Deploy a simple app to an app store for distribution
+                         <br>
+            
+        {% endif %}
+            <label for="interest">Are you interested in this internship? (yes or no)</label>
+            <select id="interest" name="interest" required>
+                <option value="yes">Yes</option>
+                <option value="no">No</option> 
+            </select>
+            <button type="submit">Next</button>
+        {% if state.int_interest.lower() == "yes" %}
+            <p>Please deposit 10k for this internship.</p>
+        {% endif %}
+
+
+
+        {% endif %}
+
+    
+  
+</body>
+</html>

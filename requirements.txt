@@ -1,0 +1,5 @@
+Gunicorn
+flask
+mysql.connector
+numpy
+pandas
